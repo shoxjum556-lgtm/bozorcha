@@ -1,0 +1,60 @@
+{% extends "storefront/base.html" %}
+{% block title %}Bozorcha — kichik do'kon{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div>
+    <span class="eyebrow">Kichik bozor · katta tanlov</span>
+    <h1>Kerakli narsa,<br>bir necha bosishda.</h1>
+    <p>Qidiring, savatga soling, buyurtma bering — hammasi shu yerda, bitta sahifada.</p>
+  </div>
+  <div class="hero-note">
+    01 — ro'yxatdan o'ting<br>
+    02 — mahsulotni tanlang<br>
+    03 — savatga soling<br>
+    04 — buyurtmani tasdiqlang
+  </div>
+</section>
+
+<div class="section-title">
+  <h2>Mahsulotlar</h2>
+  <span>{{ products|length }} ta topildi</span>
+</div>
+
+{% if categories %}
+<div class="cat-pills">
+  <a href="{% url 'home' %}" class="{% if not request.GET.category %}active{% endif %}">Barchasi</a>
+  {% for c in categories %}
+    <a href="?category={{ c.id }}" class="{% if request.GET.category == c.id|stringformat:'s' %}active{% endif %}">{{ c.name }}</a>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="grid">
+  {% for p in products %}
+    <div class="card">
+      <div class="card-img">
+        {% if p.image %}<img src="{{ p.image.url }}" alt="{{ p.name }}">{% else %}rasm yo'q{% endif %}
+      </div>
+      <div class="card-body">
+        <h3>{{ p.name }}</h3>
+        <div class="desc">{{ p.description|default:""|truncatechars:70 }}</div>
+        <div class="card-footer">
+          <span class="price">{{ p.price|floatformat:0 }} so'm</span>
+          {% if p.stock > 0 %}
+            <form method="post" action="{% url 'add_to_cart' p.id %}">
+              {% csrf_token %}
+              <button class="btn btn-sm btn-primary" type="submit">+ Savat</button>
+            </form>
+          {% else %}
+            <span class="stock-out">Tugagan</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="empty-state">Hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.</div>
+  {% endfor %}
+</div>
+
+{% endblock %}

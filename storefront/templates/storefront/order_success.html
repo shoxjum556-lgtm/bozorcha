@@ -1,0 +1,11 @@
+{% extends "storefront/base.html" %}
+{% block title %}Buyurtma qabul qilindi — Bozorcha{% endblock %}
+{% block content %}
+
+<div class="success-box">
+  <h2>Buyurtma qabul qilindi ✓</h2>
+  <p class="mono" style="color:var(--ink-soft);font-size:13px;">Raqami: №{{ order.id }} · {{ order.total_price|floatformat:0 }} so'm</p>
+  <a href="{% url 'home' %}" class="btn btn-primary" style="margin-top:16px;">Bosh sahifaga</a>
+</div>
+
+{% endblock %}

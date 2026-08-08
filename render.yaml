@@ -1,0 +1,22 @@
+databases:
+  - name: bozorcha-db
+    plan: free
+
+services:
+  - type: web
+    name: bozorcha
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn core.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bozorcha-db
+          property: connectionString

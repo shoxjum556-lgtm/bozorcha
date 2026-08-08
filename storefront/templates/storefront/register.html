@@ -1,0 +1,40 @@
+{% extends "storefront/base.html" %}
+{% block title %}Ro'yxatdan o'tish — Bozorcha{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <h2>Ro'yxatdan o'tish</h2>
+  <div class="sub">Bir necha soniyada tayyor</div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="field-row">
+      <div class="field">
+        <label>Ism</label>
+        {{ form.first_name }}
+        {{ form.first_name.errors }}
+      </div>
+      <div class="field">
+        <label>Familiya</label>
+        {{ form.last_name }}
+        {{ form.last_name.errors }}
+      </div>
+    </div>
+    <div class="field">
+      <label>Login</label>
+      {{ form.username }}
+      {{ form.username.errors }}
+    </div>
+    <div class="field">
+      <label>Telefon</label>
+      {{ form.phone }}
+      {{ form.phone.errors }}
+    </div>
+    <div class="field">
+      <label>Parol</label>
+      {{ form.password }}
+      {{ form.password.errors }}
+    </div>
+    <button class="btn btn-primary btn-block" type="submit">Ro'yxatdan o'tish</button>
+  </form>
+  <div class="switch-link">Hisobingiz bormi? <a href="{% url 'login' %}">Kirish</a></div>
+</div>
+{% endblock %}

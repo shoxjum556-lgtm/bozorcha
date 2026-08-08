@@ -1,0 +1,12 @@
+[
+  {"model": "shop.category", "pk": 1, "fields": {"name": "Elektronika"}},
+  {"model": "shop.category", "pk": 2, "fields": {"name": "Kiyim"}},
+  {"model": "shop.category", "pk": 3, "fields": {"name": "Uy-ro'zg'or"}},
+
+  {"model": "shop.product", "pk": 1, "fields": {"category": 1, "name": "Simsiz naushnik", "description": "Bluetooth 5.3, 30 soatgacha batareya", "price": "249000.00", "stock": 15, "created_at": "2026-01-01T10:00:00Z"}},
+  {"model": "shop.product", "pk": 2, "fields": {"category": 1, "name": "Quvvat banki 20000mAh", "description": "Tezkor zaryadlash, 2 ta USB port", "price": "189000.00", "stock": 8, "created_at": "2026-01-01T10:00:00Z"}},
+  {"model": "shop.product", "pk": 3, "fields": {"category": 2, "name": "Bambuk futbolka", "description": "100% organik, unisex o'lcham", "price": "99000.00", "stock": 30, "created_at": "2026-01-01T10:00:00Z"}},
+  {"model": "shop.product", "pk": 4, "fields": {"category": 2, "name": "Zamonaviy kepka", "description": "Kunduzi va kechqurun uchun qulay", "price": "65000.00", "stock": 0, "created_at": "2026-01-01T10:00:00Z"}},
+  {"model": "shop.product", "pk": 5, "fields": {"category": 3, "name": "Keramik krujka", "description": "350ml, issiqni uzoq saqlaydi", "price": "45000.00", "stock": 40, "created_at": "2026-01-01T10:00:00Z"}},
+  {"model": "shop.product", "pk": 6, "fields": {"category": 3, "name": "Aroma sham to'plami", "description": "3 dona, lavanda va vanil hidi", "price": "78000.00", "stock": 12, "created_at": "2026-01-01T10:00:00Z"}}
+]

@@ -1,0 +1,49 @@
+{% extends "storefront/base.html" %}
+{% block title %}Profil — Bozorcha{% endblock %}
+{% block content %}
+
+<div class="profile-header" style="margin-top:32px;">
+  <div class="profile-avatar">{{ user.username|first|upper }}</div>
+  <div>
+    <h2>{{ user.username }}</h2>
+    <div class="mono" style="color:var(--ink-soft);font-size:13px;">{{ user.first_name }} {{ user.last_name }}</div>
+  </div>
+</div>
+
+<div class="section-title"><h2 style="font-size:18px;">Profilni tahrirlash</h2></div>
+<form method="post" enctype="multipart/form-data" style="max-width:420px;">
+  {% csrf_token %}
+  <div class="field">
+    <label>Bio</label>
+    {{ form.bio }}
+  </div>
+  <div class="field">
+    <label>Tug'ilgan sana</label>
+    {{ form.date_of_birth }}
+  </div>
+  <div class="field">
+    <label>Rasm</label>
+    {{ form.profile_picture }}
+  </div>
+  <div class="field">
+    <label>Veb-sayt</label>
+    {{ form.website }}
+  </div>
+  <button class="btn btn-primary" type="submit">Saqlash</button>
+</form>
+
+<div class="section-title"><h2 style="font-size:18px;">Buyurtmalarim</h2></div>
+{% if orders %}
+  {% for o in orders %}
+    <div class="order-row">
+      <span>№{{ o.id }} · {{ o.created_at|date:"d.m.Y" }}</span>
+      <span class="order-status">{{ o.get_status_display }}</span>
+      <span class="mono">{{ o.total_price|floatformat:0 }} so'm</span>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty-state" style="padding:24px 0;">Hozircha buyurtmalar yo'q</div>
+{% endif %}
+
+<div style="height:40px;"></div>
+{% endblock %}

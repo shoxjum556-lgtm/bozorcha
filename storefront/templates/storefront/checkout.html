@@ -1,0 +1,19 @@
+{% extends "storefront/base.html" %}
+{% block title %}Buyurtmani rasmiylashtirish — Bozorcha{% endblock %}
+{% block content %}
+
+<div class="auth-wrap">
+  <h2>Buyurtmani rasmiylashtirish</h2>
+  <div class="sub">Jami: <span class="mono">{{ cart.total_price|floatformat:0 }} so'm</span> ({{ cart.items.count }} mahsulot)</div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="field">
+      <label>Yetkazib berish manzili</label>
+      {{ form.address }}
+      {{ form.address.errors }}
+    </div>
+    <button class="btn btn-primary btn-block" type="submit">Buyurtmani tasdiqlash</button>
+  </form>
+</div>
+
+{% endblock %}
