@@ -16,10 +16,19 @@ RAILWAY_HOSTNAME = os.getenv("RAILWAY_PUBLIC_DOMAIN")
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in [RENDER_HOSTNAME, RAILWAY_HOSTNAME] if h] 
+CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in [RENDER_HOSTNAME, RAILWAY_HOSTNAME] if h]
 CSRF_TRUSTED_ORIGINS += ["https://*.up.railway.app", "https://*.onrender.com", "https://bozorch-production.up.railway.app"]
 
-INSTALLED_APPS = [
+BASE_DIR_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]
+
+THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_spectacular',
     'rest_framework_simplejwt',
@@ -28,9 +37,20 @@ INSTALLED_APPS = [
     "django_filters",
 ]
 
+LOCAL_APPS = ["users", "posts", "shop", "storefront"]
+
+INSTALLED_APPS = BASE_DIR_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -101,26 +121,6 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
-
-BASE_DIR_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-]
-INSTALLED_APPS = BASE_DIR_APPS + INSTALLED_APPS + ["users", "posts", "shop", "storefront"]
-
-MIDDLEWARE += [
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
 
 ROOT_URLCONF = "core.urls"
 
