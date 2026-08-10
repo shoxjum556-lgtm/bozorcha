@@ -163,3 +163,12 @@ def debug_csrf(request):
         'cart': cart,
         'cart_count': _cart_count(request.user),
     })
+from django.http import JsonResponse
+from django.conf import settings as dj_settings
+
+def debug_csrf(request):
+    return JsonResponse({
+        "CSRF_TRUSTED_ORIGINS": dj_settings.CSRF_TRUSTED_ORIGINS,
+        "ALLOWED_HOSTS": dj_settings.ALLOWED_HOSTS,
+        "DEBUG": dj_settings.DEBUG,
+    })
