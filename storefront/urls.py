@@ -13,3 +13,4 @@ urlpatterns = [
     path('cart/item/<int:item_id>/', views.update_cart_item, name='update_cart_item'),
     path('checkout/', views.checkout_view, name='checkout'),
 ]
+path('debug-csrf/', views.debug_csrf, name='debug_csrf'),
