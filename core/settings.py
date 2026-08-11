@@ -14,7 +14,7 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 RENDER_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 RAILWAY_HOSTNAME = os.getenv("RAILWAY_PUBLIC_DOMAIN")
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["bozorch-production.up.railway.app"]
 
 CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in [RENDER_HOSTNAME, RAILWAY_HOSTNAME] if h]
 CSRF_TRUSTED_ORIGINS = [
